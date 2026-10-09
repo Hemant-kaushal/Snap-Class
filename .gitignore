@@ -14,3 +14,23 @@ myenv/
 dist/
 
 
+
+
+# Secrets
+.streamlit/secrets.toml
+.env
+*.env
+
+# Virtual environment
+myenv/
+venv/
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# OS / IDE files
+.DS_Store
+.idea/
+.vscode/

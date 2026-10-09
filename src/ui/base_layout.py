@@ -1,7 +1,7 @@
 import streamlit as st
 
 
-def style_background_home():
+def style_background_home(): 
 
     st.markdown("""
         <style>
@@ -60,15 +60,21 @@ def style_base_layout():
                 font-size: 3.5rem !important;
                 line-height:1.1 !important;
                 margin-bottom:0rem !important;
+                color: #1a1a1a !important;
             }
                 
-
+                
             h2 {
                 font-family: 'Climate Crisis', sans-serif !important;
                 font-size: 2rem !important;
-                line-height:0.9 !important;
-                margin-bottom:0rem !important;
-                color: #1a1a1a !important;
+                line-height: 0.9 !important;
+                margin-bottom: 0rem !important;
+                color: #1a1a1a !important;   /* ← dark color for screen headings */
+            }
+
+            /* Only logo heading in header_dashboard */
+            h2.logo-heading {
+                color: #5865F2 !important;  
             }
                 
             h3, h4, p {
@@ -105,6 +111,13 @@ def style_base_layout():
 
             button:hover{
                 transform :scale(1.05)}
+
+            div[data-testid="stTextInput"] label {
+                color: #1a1a2e !important;
+                font-family: 'Outfit', sans-serif !important;
+                font-weight: 600 !important;
+            }
+                
         </style>  
 
                 """
