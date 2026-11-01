@@ -204,20 +204,21 @@ def teacher_tab_manage_subjects():
                 ("🫂", "Students", sub['total_students']),
                 ("🕰️", "Classes", sub['total_classes']),
             ]
-        def share_btn():
-            if st.button(f"Share Code: {sub['name']}", key=f"share_{sub['subject_code']}", icon=":material/share:"):
-                share_subject_dialog(sub['name'], sub['subject_code'])
-            st.space()
 
-        subject_card(
-            name = sub['name'],
-            code = sub['subject_code'],
-            section = sub['section'],
-            stats=stats,
-            footer_callback=share_btn
-        )
+            def share_btn(sub=sub):
+                if st.button(f"Share Code: {sub['name']}", key=f"share_{sub['subject_code']}", icon=":material/share:"):
+                    share_subject_dialog(sub['name'], sub['subject_code'])
+                st.space()
+
+            subject_card(
+                name=sub['name'],
+                code=sub['subject_code'],
+                section=sub['section'],
+                stats=stats,
+                footer_callback=share_btn
+            )
     else:
-        st.info("NO SUBJECTS FOUND. CREATE ONE ABOVE")
+        st.info("NO SUBJECTS FOUND. CREATE ONE ABOVE")    
 
 
 def teacher_tab_attendance_records():
@@ -280,10 +281,9 @@ def login_teacher(username, password):
         st.session_state.teacher_data = teacher
         st.session_state.is_logged_in = True
         return True
-    
-
-
     return False
+
+
 def teacher_screen_login():
     c1, c2 = st.columns(2, vertical_alignment='center', gap='xxlarge')
     with c1:
@@ -298,7 +298,7 @@ def teacher_screen_login():
     st.space()
 
 
-    teacher_username = st.text_input("Enter username", placeholder='@hemant')
+    teacher_username = st.text_input("Enter username", placeholder='username')
 
     teacher_pass = st.text_input("Enter password", type='password', placeholder="Enter password")
 
@@ -354,9 +354,9 @@ def teacher_screen_register():
     st.space()
 
     
-    teacher_username = st.text_input("Enter username", placeholder='@hemant')
+    teacher_username = st.text_input("Enter username", placeholder='username')
 
-    teacher_name = st.text_input("Enter name", placeholder='Hemant Kaushal')
+    teacher_name = st.text_input("Enter name", placeholder='Name')
 
     teacher_pass = st.text_input("Enter password", type='password', placeholder="Enter password")
 

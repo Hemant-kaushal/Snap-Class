@@ -66,10 +66,17 @@ def student_dashboard():
 
         stats = stats_map.get(sid,{"total":0, "attended": 0} )
         def unenroll_button():
-                if st.button("Unenroll from tihs course", type='tertiary', width='stretch', icon=':material/delete_forever:'):
-                    unenroll_student_to_subject(student_id, sid)
-                    st.toast(f'Unenrolled from {sub['name']} successfully!')
-                    st.rerun()
+            if st.button(
+                "Unenroll from this course",
+                type='tertiary',
+                width='stretch',
+                icon=':material/delete_forever:',
+                key=f"unenroll_{sid}"
+            ):
+                unenroll_student_to_subject(student_id, sid)
+                st.toast(f"Unenrolled from {sub['name']} successfully!")
+                st.rerun()
+
 
         with cols[i % 2]:
 
@@ -86,7 +93,6 @@ def student_dashboard():
 
 
 def student_screen():
-
 
     style_background_dashboard()
     style_base_layout()
@@ -163,7 +169,10 @@ def student_screen():
 
                             voice_emb = None
                             if audio_data:
-                                voice_emb = get_voice_embedding(audio_data.read())
+                                voice_emb = get_voice_embedding(audio_data.getvalue())
+                                if voice_emb is None:
+                                    st.warning('Voice could not be saved. Record again, or delete the recording to continue without voice.')
+                                    st.stop()
 
                             response_data = create_student(new_name, face_embedding=face_emb, voice_embedding=voice_emb)
 

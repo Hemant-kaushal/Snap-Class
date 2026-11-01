@@ -19,7 +19,7 @@ bcrypt
 # For GENERATING QR CODES
 segno
 
-# For IMAGE PROCESSING
+# For IMAGE PRE-PROCESSING
 pillow
 
 

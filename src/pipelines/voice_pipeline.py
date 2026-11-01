@@ -10,16 +10,24 @@ def load_voice_encoder():
     return VoiceEncoder()
 
 
+import traceback
+
 def get_voice_embedding(audio_bytes):
     try:
         encoder = load_voice_encoder()
 
         audio, sr = librosa.load(io.BytesIO(audio_bytes), sr=16000)
         wav = preprocess_wav(audio)
+
+        if len(wav) < 8000:   # less than 0.5 sec of speech found
+            st.error('No clear speech found. Please record again and speak louder.')
+            return None
+
         embedding = encoder.embed_utterance(wav)
         return embedding.tolist()
     except Exception as e:
-        st.error('Voice recog error')
+        st.error(f'Voice error: {e}')
+        st.code(traceback.format_exc())   # remove this line after debugging
         return None
     
 
